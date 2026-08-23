@@ -198,22 +198,25 @@ async function main() {
     `Waiting until Sepolia block ${receipt.blockNumber} is attested on Creditcoin...`,
   );
 
-  await chainInfoProvider.waitUntilHeightAttested(
+  // The Attestcoin SDK guide recommends waiting through the Proof Builder
+  // service so the attestation is also available in the builder cache.
+  const proofBuilder = new proofProvider.service.ProofBuilder(
+    chainKey,
+    proofBuilderUrl,
+    5000,
+  );
+
+  await proofBuilder.waitUntilHeightAttested(
     chainKey,
     receipt.blockNumber,
   );
 
-  console.log("✓ block is attested");
+  console.log("✓ block is attested and available to Proof Builder");
 
   // ---------------------------------------------------------------------------
   // 4. Fetch Merkle + continuity proofs from the official Proof Builder.
   // ---------------------------------------------------------------------------
   console.log("\n[4/5] Generating Attestcoin proof...");
-
-  const proofBuilder = new proofProvider.service.ProofBuilder(
-    chainKey,
-    proofBuilderUrl,
-  );
 
   const result = await proofBuilder.getProof(txHash);
 
