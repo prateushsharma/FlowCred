@@ -17,3 +17,4 @@ broadcast/
 node_modules/
 worker/node_modules/
 frontend/node_modules/
+worker/.artifacts/
