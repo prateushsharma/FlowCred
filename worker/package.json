@@ -1,0 +1,15 @@
+{
+  "name": "@flowcred/attestcoin-worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prove": "node prove-revenue.mjs",
+    "check": "node --check prove-revenue.mjs"
+  },
+  "dependencies": {
+    "@gluwa/usc-sdk": "0.18.0",
+    "ethers": "^6.13.0",
+    "@gluwa/usc-contracts": "0.1.2"
+  }
+}
